@@ -7,4 +7,4 @@
 
 3:添加随机裁剪源码random_cut2.py
 
-4：添加Small_All_Detection.py（qq.py改进版）
+4:添加Small_All_Detection.py（qq.py改进版）
