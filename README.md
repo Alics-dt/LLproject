@@ -1,4 +1,3 @@
 # LLproject
 协同编程
-
-你会Girhub Desktop就好了
+LULU:qq.py第三行加了 #你看
