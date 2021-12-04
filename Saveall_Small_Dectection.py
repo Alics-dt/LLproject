@@ -3,35 +3,42 @@
 import cv2
 import random
 import numpy as np
+import torchvision.transforms as transforms
+from PIL import Image
 
 aa = []
 img = cv2.imread('C:\\Users\C\Documents\GitHub\LLproject\dataset\Image\\000311.jpg')
 sp = img.shape
 sz1 = sp[0]#height(rows) of image
 sz2 = sp[1]#width(colums) of image
-
 save_point_bigx = []
 save_point_bigy = []
 save_point_small = np.array([[0, 0]])
 save_point_small = np.array(save_point_small, np.int32)
-
+i = 1
 def random_crop_with_points(img, save_point_small):
-
+    top, bottom, lft, r = 0, 0, 0, 0
     #h, w = img.shape[: 2]
     points = np.array(save_point_small, np.int32)
     min_x, min_y, max_x, max_y = np.min(points[:, 0]), np.min(points[:, 1]), np.max(points[:, 0]), np.max(points[:, 1])
     print(min_x, min_y, max_x, max_y)
+    if min_x == max_x :#or max_x < 112 or max_y < 112:
+        return img
     #x_center, y_center = (min_x + max_x)/2,(min_y + max_y)/2
     x_limit = max_x - min_x
     y_limit = max_y - min_y
-    #if x_limit < 224 or y_limit < 224:
-
-    #if
-    new_img = img[min_x: max_x,min_y: max_y, :]
+    min_x, max_x, min_y, max_y = min_x - 32, max_x + 20, min_y - 10, max_y + 10
+    if y_limit < 224 :
+        top, bottom = int((224 - y_limit)/2), int((224 - y_limit)/2)
+    if x_limit < 224 :
+        lft, r =  int((224 - x_limit)/2), int((224 - x_limit)/2)
     #wn, hn, xn, yn
+    new_img = img[min_x: max_x, min_y: max_y, :]
+    new_img = cv2.copyMakeBorder(new_img, lft, r,top, bottom,  borderType=cv2.BORDER_REPLICATE)
     return new_img
 
 with open("C:\\Users\C\Documents\GitHub\LLproject\dataset\Label\\000311.txt", "r") as f:
+
     for line in f.readlines():
         data = line.split('\n\t')
         for str in data:
@@ -40,19 +47,25 @@ with open("C:\\Users\C\Documents\GitHub\LLproject\dataset\Label\\000311.txt", "r
             numbers_float = list(numbers_float)
             x = sp[0] * numbers_float[2]
             y = sp[1] * numbers_float[1]
-            xy = ([[x,y]])
-            print(xy)
             w = sp[0] * numbers_float[3]
             h = sp[1] * numbers_float[3]
             s = w*h
-            #x_limit, y_limit = sp[0] - 112, sp[1] - 112
-            if s < 1024:#and x > 112 and y > 112 and x < x_limit and y < y_limit:
+            limit_x = sp[0] - 112
+            limit_y = sp[1] - 112
+            if i == 1 :#and x > 112 and y > 112 and x < limit_x and y < limit_y:
+                save_point_small = ([[x,y]])
+                i = 0
+            elif s < 1024 :#and x > 112 and y > 112 and x < limit_x and y < limit_y:
+                xy = ([[x,y]])
                 save_point_small = np.append(save_point_small, xy, axis=0)
                 print(save_point_small)
             else:
                 save_point_bigx.append(x)
                 save_point_bigy.append(y)
-    print(save_point_bigx,save_point_bigy)
+            #print(xy)
+            #x_limit, y_limit = sp[0] - 112, sp[1] - 112
+            #if s < 1024:#and x > 112 and y > 112 and x < x_limit and y < y_limit:
+    #print(save_point_bigx,save_point_bigy)
     new_img = random_crop_with_points(img, save_point_small)
     s2p = new_img.shape
     print(s2p)
