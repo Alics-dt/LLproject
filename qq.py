@@ -1,6 +1,6 @@
 import cv2
 import random
-
+# 你看！
 aa = []
 img = cv2.imread('D:\pycharm_project\data\VOC2028\JPEGImages\\000378.jpg')
 sp = img.shape
