@@ -5,7 +5,7 @@ import random
 import numpy as np
 
 aa = []
-img = cv2.imread('C:\\Users\C\Documents\GitHub\LLproject\dataset\Image\\000308.jpg')
+img = cv2.imread('C:\\Users\C\Documents\GitHub\LLproject\dataset\Image\\000311.jpg')
 sp = img.shape
 sz1 = sp[0]#height(rows) of image
 sz2 = sp[1]#width(colums) of image
@@ -22,12 +22,16 @@ def random_crop_with_points(img, save_point_small):
     min_x, min_y, max_x, max_y = np.min(points[:, 0]), np.min(points[:, 1]), np.max(points[:, 0]), np.max(points[:, 1])
     print(min_x, min_y, max_x, max_y)
     #x_center, y_center = (min_x + max_x)/2,(min_y + max_y)/2
+    x_limit = max_x - min_x
+    y_limit = max_y - min_y
+    #if x_limit < 224 or y_limit < 224:
+
     #if
-    new_img = img[min_y: max_y, min_x: max_x, :]
+    new_img = img[min_x: max_x,min_y: max_y, :]
     #wn, hn, xn, yn
     return new_img
 
-with open("C:\\Users\C\Documents\GitHub\LLproject\dataset\Label\\000308.txt", "r") as f:
+with open("C:\\Users\C\Documents\GitHub\LLproject\dataset\Label\\000311.txt", "r") as f:
     for line in f.readlines():
         data = line.split('\n\t')
         for str in data:
@@ -48,7 +52,7 @@ with open("C:\\Users\C\Documents\GitHub\LLproject\dataset\Label\\000308.txt", "r
             else:
                 save_point_bigx.append(x)
                 save_point_bigy.append(y)
-
+    print(save_point_bigx,save_point_bigy)
     new_img = random_crop_with_points(img, save_point_small)
     s2p = new_img.shape
     print(s2p)
