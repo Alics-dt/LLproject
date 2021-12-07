@@ -4,10 +4,10 @@ from matplotlib import patches
 import cv2 as cv
 
 if __name__ == '__main__':
-    img_path = 'C:\\Users\C\Documents\GitHub\LLproject\dataset\Image\\100017.JPG'
+    img_path = 'C:\\Users\C\Documents\GitHub\LLproject\dataset\Image\\100009.JPG'
     img = np.array(cv.imread(img_path))
     H, W, C = img.shape
-    label_path = 'C:\\Users\C\Documents\GitHub\LLproject\dataset\Label\\100017.txt'
+    label_path = 'C:\\Users\C\Documents\GitHub\LLproject\dataset\Label\\100009.txt'
     boxes = np.loadtxt(label_path, dtype=np.float).reshape(-1, 5)
     # xywh to xxyy
     # yolo格式数据集，转换成坐标形式并展示
