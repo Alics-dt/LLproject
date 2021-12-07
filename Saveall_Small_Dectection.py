@@ -14,6 +14,7 @@ n = 0
 def random_crop_with_points(img, save_point_small, w, h,
                             save_point_bigx, save_point_bigy, save_point_w_big, save_point_h_big,
                             save_class):
+
     print(w)
     top, bottom, lft, r = 0, 0, 0, 0
     points = np.array(save_point_small, np.int32)
@@ -42,20 +43,20 @@ def random_crop_with_points(img, save_point_small, w, h,
     if x_limit < 224 :
         lft, r =  int((224 - x_limit)/2), int((224 - x_limit)/2)
 
-    cv2.imshow('1', img)
-    cv2.waitKey(0)
+    #cv2.imshow('1', img)
+    #cv2.waitKey(0)
 
     new_img = img[min_y: max_y, min_x: max_x, :]
-    cv2.imshow('1', new_img)
-    cv2.waitKey(0)
+    #cv2.imshow('1', new_img)
+    #cv2.waitKey(0)
     print(lft, r, top, bottom)
     new_img = cv2.copyMakeBorder(new_img, top, bottom, lft, r, borderType=cv2.BORDER_REPLICATE)
     s2p = new_img.shape
-    sz2 = s2p[0]  # height(rows) of image
-    sz2 = s2p[1]  # width(colums) of image
-    cv2.imshow('1', new_img)
-    cv2.waitKey(0)
-    #if not new_img.all():
+    #sz2 = s2p[0]  # height(rows) of image
+    #sz2 = s2p[1]  # width(colums) of image
+    #cv2.imshow('1', new_img)
+    #cv2.waitKey(0)
+
     file_save_txt = open('C:\\Users\C\Documents\GitHub\LLproject\dataset\Label\\'
                         + str(100000 + n).zfill(6)
                         + '.txt', 'w')
@@ -67,7 +68,7 @@ def random_crop_with_points(img, save_point_small, w, h,
                                         w[number_save] / s2p[1], \
                                         h[number_save] / s2p[0]
 
-        file_save_txt.write(str(int(save_class[n]))+" "+
+        file_save_txt.write(str(int(save_class[number_save]))+" "+
                             str(save_x,)+" "+
                             str(save_y,)+" "+
                             str(float(save_w))+" "+
@@ -89,8 +90,8 @@ def chuli(image,n):
     i = 1
     img = cv2.imread("C:\\Users\C\Documents\GitHub\LLproject\dataset\Image\\"+image)
     sp = img.shape
-    sz1 = sp[0]#height(rows) of image
-    sz2 = sp[1]#width(colums) of image
+    #sz1 = sp[0]#height(rows) of image
+    #sz2 = sp[1]#width(colums) of image
     #if sz1 < 350 or sz2 < 350:
         #return 1
     with open("C:\\Users\C\Documents\GitHub\LLproject\dataset\Label\\"+f_lable[n], "r") as f:
