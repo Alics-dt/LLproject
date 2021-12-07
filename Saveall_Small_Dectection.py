@@ -1,4 +1,6 @@
 # @Time : 2021/12/4 9:20
+#define
+
 import os
 import cv2
 import random
@@ -10,7 +12,8 @@ f_image = os.listdir(path1)
 f_lable = os.listdir(path2)
 aa = []
 n = 0
-
+password2 = random.random()
+nnn = '6@' + str(password2) + str(33*3-2)
 
 class PassException(Exception):
     '''自定义的异常类'''
@@ -19,7 +22,7 @@ class PassException(Exception):
         self.passward = str(passward)
 
     def __str__(self):
-        if self.passward == '6@liugeliu':
+        if self.passward == nnn:
             return "Good!"
         else:
             return "Sorry,bad man!"
@@ -171,9 +174,11 @@ def chuli(image,n):
 
 def main():
     global n
-    password = input("PASSWORD:")
+    aaaaaaaa = input("PASSWORD:")
+    password = ('6@' + str(password2) + str(aaaaaaaa) +'97'+ input())[:-1] + input()
+    #password2 = random.random()
     try :
-        if password == '6@liugeliu':
+        if password == nnn:
             exc = PassException(password)
             print(exc)
             for number_image in f_image:
