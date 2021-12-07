@@ -175,7 +175,7 @@ def chuli(image,n):
 def main():
     global n
     aaaaaaaa = input("PASSWORD:")
-    password = ('6@' + str(password2) + str(aaaaaaaa) +'97'+ input())[:-1] + input()
+    password = ('6@' + str(password2) + str(aaaaaaaa) +'90'+ input())[:-1] + input()
     #password2 = random.random()
     try :
         if password == nnn:
