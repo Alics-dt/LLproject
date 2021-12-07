@@ -11,6 +11,19 @@ f_lable = os.listdir(path2)
 aa = []
 n = 0
 
+
+class PassException(Exception):
+    '''自定义的异常类'''
+
+    def __init__(self, passward):
+        self.passward = str(passward)
+
+    def __str__(self):
+        if self.passward == '6@liugeliu':
+            return "Good!"
+        else:
+            return "Sorry,bad man!"
+
 def random_crop_with_points(img, save_point_small, w, h,
                             save_point_bigx, save_point_bigy, save_point_w_big, save_point_h_big,
                             save_class, save_calss_big):
@@ -158,11 +171,21 @@ def chuli(image,n):
 
 def main():
     global n
-    for number_image in f_image:
-        name = f_image[n]
-        print(name)
-        chuli(name,n)
-        n += 1
+    password = input("PASSWORD:")
+    try :
+        if password == '6@liugeliu':
+            exc = PassException(password)
+            print(exc)
+            for number_image in f_image:
+                name = f_image[n]
+                print(name)
+                chuli(name,n)
+                n += 1
+        else:
+            raise PassException(password)
+
+    except PassException as e:
+        print("SORRY! YOU CAN'T USE IT", e)
 
 if __name__ == "__main__":
     main()
