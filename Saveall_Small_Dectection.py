@@ -24,7 +24,7 @@ def random_crop_with_points(img, save_point_small, w, h,
                                  np.max(points[:, 1])
     print(min_x, min_y, max_x, max_y)
 
-    if min_x == max_x :
+    if len(w) <= 3:
         return 0
 
     x_limit = max_x - min_x
@@ -90,10 +90,10 @@ def chuli(image,n):
     i = 1
     img = cv2.imread("C:\\Users\C\Documents\GitHub\LLproject\dataset\Image\\"+image)
     sp = img.shape
-    #sz1 = sp[0]#height(rows) of image
-    #sz2 = sp[1]#width(colums) of image
-    #if sz1 < 350 or sz2 < 350:
-        #return 1
+    sz1 = sp[0]#height(rows) of image
+    sz2 = sp[1]#width(colums) of image
+    if sz1 <= 320 or sz2 <= 320:
+        return 0
     with open("C:\\Users\C\Documents\GitHub\LLproject\dataset\Label\\"+f_lable[n], "r") as f:
 
         for line in f.readlines():
