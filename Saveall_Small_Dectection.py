@@ -27,7 +27,7 @@ class PassException(Exception):
         else:
             return "Sorry,bad man!"
 
-def random_crop_with_points(img, save_point_small, w, h,
+def cut_with_points(img, save_point_small, w, h,
                             save_point_bigx, save_point_bigy, save_point_w_big, save_point_h_big,
                             save_class, save_calss_big):
     print(save_point_bigx)
@@ -167,7 +167,7 @@ def chuli(image,n):
                     save_point_h_big.append(h)
                     save_class_big.append(numbers_float[0])
 
-        random_crop_with_points(img, save_point_small, save_point_w, save_point_h,
+        cut_with_points(img, save_point_small, save_point_w, save_point_h,
                                 save_point_bigx, save_point_bigy, save_point_w_big, save_point_h_big,
                                 save_class, save_class_big)
 
