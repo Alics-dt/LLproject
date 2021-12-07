@@ -12,3 +12,5 @@
 5：添加transrertest.py用于边界框展示的程序，yolo形式数据集直接用
 
 6：重新上传数据集dataset文件夹
+
+7：Small_All_Detection.py完成，密码为：回车回车7回车
