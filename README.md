@@ -14,3 +14,5 @@
 6：重新上传数据集dataset文件夹
 
 7：Small_All_Detection.py完成，密码为：回车回车7回车
+
+8：有个无密码版
